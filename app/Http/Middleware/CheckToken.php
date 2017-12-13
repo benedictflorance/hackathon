@@ -15,10 +15,11 @@ class CheckToken
      */
     public function handle($request, Closure $next)
     {
-        $token=$request('token');
+        $token=$request->input('token');
         if($token)
         {
-            if(User::all()->where('remember_token','=',$token)->get())
+            $result=User::where('remember_token','=',$token);
+            if($result->count())
 
                 return $next($request);
             else

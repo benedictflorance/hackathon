@@ -13,6 +13,24 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// API Events
+Route::post('login', 'api\LoginController@login');
+
+Route::group(['middleware'=>'checkToken', 'namespace'=>'api'],function(){
+	// Authentication Routes
+	Route::post('logout','LoginController@logout');
+
+	// User Forms
+	Route::post('newuser','UserController@newUser');
+	Route::post('newtrusted','UserController@newTrusted');
+
+	//User Details
+	Route::post('doctors/gettrusted','UserController@getTrusted');
+	Route::post('checkups/getall','UserController@getHistory');
+	Route::post('checkups/getbytime','UserController@getCheckupTimeStamped');
+
+	// Doctor Details
+	Route::post('doctors/getall','DoctorController@getAll');
+
 });
+
