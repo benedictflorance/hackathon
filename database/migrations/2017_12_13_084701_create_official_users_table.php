@@ -15,8 +15,8 @@ class CreateOfficialUsersTable extends Migration
     {
         Schema::create('official_users', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('aadhar')->unique();
-            $table->integer('mobile');
+            $table->biginteger('aadhar')->unique();
+            $table->biginteger('mobile');
 
         });
     }

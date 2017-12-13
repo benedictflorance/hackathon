@@ -15,8 +15,8 @@ class CreateTrustedDoctorsTable extends Migration
     {
         Schema::create('trusted_doctors', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('aadhar');
-            $table->integer('registerid');
+            $table->biginteger('aadhar');
+            $table->biginteger('registerid');
             $table->unique(['aadhar','registerid']);
         });
     }

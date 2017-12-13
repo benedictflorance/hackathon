@@ -15,8 +15,8 @@ class CreateCheckupsTable extends Migration
     {
         Schema::create('checkups', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('aadhar');
-            $table->integer('registerid');
+            $table->biginteger('aadhar');
+            $table->biginteger('registerid');
             $table->mediumText('questions');
             $table->longText('advice');
             $table->mediumText('medicines');
@@ -24,7 +24,7 @@ class CreateCheckupsTable extends Migration
             $table->boolean('vaccination');
             $table->boolean('surgery');
             $table->string('accompany',512)->nullable();
-            $table->integer('accmobile')->nullable();
+            $table->biginteger('accmobile')->nullable();
             $table->mediumText('surgdetail')->nullable();
             $table->mediumText('vaccdetail')->nullable();
             $table->mediumText('emergdetail')->nullable();

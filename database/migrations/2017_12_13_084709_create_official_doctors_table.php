@@ -15,7 +15,7 @@ class CreateOfficialDoctorsTable extends Migration
     {
         Schema::create('official_doctors', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('registerid')->unique();
+            $table->biginteger('registerid')->unique();
             $table->string('email',256);
         });
     }
