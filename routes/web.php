@@ -12,9 +12,9 @@
 */
 
 // API Events
+Route::post('login', 'api\LoginController@login');
 Route::group(['middleware'=>'CheckToken','prefix'=>'api'],function(){
 	// Authentication Routes
-	Route::post('login', 'api\LoginController@login');
 	Route::post('logout','api\LoginController@logout');
 
 	// User Forms
