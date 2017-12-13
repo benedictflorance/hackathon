@@ -11,6 +11,23 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// API Events
+Route::group(['middleware'=>'CheckToken','prefix'=>'api'],function(){
+	// Authentication Routes
+	Route::post('login', 'api\LoginController@login');
+	Route::post('logout','api\LoginController@logout');
+
+	// User Forms
+	Route::post('newuser','api\UserController@newUser');
+	Route::post('newtrusted','api\UserController@newTrusted');
+
+	//User Details
+	Route::post('doctors/gettrusted','api\UserController@getTrusted');
+	Route::post('checkups/getall','api\UserController@getHistory');
+	Route::post('checkups/getbytime','api\UserController@getCheckupTimeStamped');
+
+	// Doctor Details
+	Route::post('doctors/getall','api\DoctorController@getAll');
+
 });
+
