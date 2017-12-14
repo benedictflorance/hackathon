@@ -14,8 +14,13 @@ use Illuminate\Http\Request;
 */
 
 // API Events
+
 Route::post('login', 'api\LoginController@login');
 Route::post('newuser','api\UserController@newUser');
+
+// Doctor Details
+Route::post('doctors/getall','api\DoctorController@getAll');
+Route::post('doctors/getbyid/{id}','api\DoctorController@getById'); //id here means registerid of the doctor
 
 Route::group(['middleware'=>'checkToken', 'namespace'=>'api'],function(){
 	// Authentication Routes
@@ -28,10 +33,6 @@ Route::group(['middleware'=>'checkToken', 'namespace'=>'api'],function(){
 	Route::post('profile','UserController@getProfile');
 	Route::post('doctors/gettrusted','UserController@getTrusted');
 	Route::post('checkups/getall','UserController@getHistory');
-	Route::post('checkups/id/{id}','UserController@getCheckupById');
-
-	// Doctor Details
-	Route::post('doctors/getall','DoctorController@getAll');
-
+	Route::post('checkups/id/{id}','UserController@getCheckupById'); //id here means the primary key id of the checkup
 });
 
