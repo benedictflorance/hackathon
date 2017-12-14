@@ -10,7 +10,7 @@ class TrustedDoctor extends Model
 {
     //
     public $timestamps = false;
-
+    protected $fillable = ['aadhar','registerid'];
     public function doctor()
     {
     	return $this->belongsTo(Doctor::class,'registerid','registerid');
