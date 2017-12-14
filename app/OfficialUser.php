@@ -9,6 +9,8 @@ use App\Checkup;
 class OfficialUser extends Model
 {
     //
+    public $timestamps = false;
+
     public function user()
     {
     	return $this->hasOne(User::class,'aadhar','aadhar');

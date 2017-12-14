@@ -8,6 +8,8 @@ use App\Doctor;
 class OfficialDoctor extends Model
 {
     //
+    public $timestamps = false;
+
     public function doctor()
     {
     	return $this->hasOne(Doctor::class,'registerid','registerid');
