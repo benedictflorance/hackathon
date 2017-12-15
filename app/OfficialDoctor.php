@@ -9,6 +9,7 @@ class OfficialDoctor extends Model
 {
     //
     public $timestamps = false;
+    public $fillable = ['token'];
 
     public function doctor()
     {
