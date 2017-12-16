@@ -105,12 +105,30 @@
  </div>
  <div class="form-style-8">
   <h2>Login to your account:</h2>
-  <form>
-    <input type="number" name="field1" placeholder="Enter Your Registered Medical Practitioner ID" max="10" />
-    <input type="password" name="field2" placeholder="Enter Your Password" maxlength="128" />
+  <form action="{{url('login')}}" method="POST">
+    {{csrf_field()}}
+    @if ($errors->any())
+    <div class="alert alert-danger p-1 mt-2">
+            @foreach ($errors->all() as $error)
+                <strong>{{ $error }}</strong>
+            @endforeach
+    </div>
+    @endif
+    @if(isset($success))
+<div class="alert alert-success p-1 mt-2">
+            <strong>{{ $success }}</strong>
+    </div>
+@endif
+@if(isset($failure))
+<div class="alert alert-danger p-1 mt-2">
+            <strong>{{ $failure }}</strong>
+    </div>
+@endif
+    <input type="text" name="registerid" placeholder="Enter Your Registered Medical Practitioner ID" maxlength="10" />
+    <input type="password" name="password" placeholder="Enter Your Password" maxlength="128" />
     <br>
     <div class="button">
-    <input type="button" value="Login" />
+    <input type="submit" value="Login" />
     </div>
   </form>
 </div>

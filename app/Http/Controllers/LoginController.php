@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Validator;
 use App\OfficialDoctor;
 use App\Doctor;
+use Session;
 
 class LoginController extends Controller
 {
@@ -51,7 +52,7 @@ class LoginController extends Controller
                         'haddress' => $request->input('haddress'),
                         'password' => password_hash($request->input('password'),PASSWORD_DEFAULT),
                     ]);
-                    return view('login');
+                    return redirect('login');
                 }
                 else
                 {
@@ -59,12 +60,54 @@ class LoginController extends Controller
                 }
             }
     }
-    public function login()
+    public function login(Request $request)
     {
+        $validator = Validator::make($request->all(),[
+                'registerid' => 'required|numeric|digits_between:1,10',
+                'password' => 'required|max:127'
+            ]);
+            if($validator->fails())
+            {
+                return redirect()->back()->withErrors($validator);
+            }
+            else
+            {
+                $registerid = $request->input('registerid');
+                $password = $request->input('password');
+                $doctor = Doctor::where('registerid','=',$registerid)->first();
+                if($doctor)
+                {
+                    if(password_verify($password,$doctor->password))
+                    {
+                        $remember_token = str_random(60);
+                        $doctor->update(['remember_token' => $remember_token]);
+                        Session::put([
+                            'name' => $doctor->name,
+                            'email' => $doctor->officialdoctor()->first()->email,
+                            'registerid' => $doctor->registerid,
+                            'mobile' => $doctor->mobile,
+                            'hname'=> $doctor->hname,
+                            'haddress' => $doctor->haddress,
+                        ]);       
+                        return redirect('home');       
+                    }
+                    else
+                    {
+                    return view('login')->with('failure','Invalid Credentials');
 
-    }
-    public function logout()
+                    }
+                }
+                else
+                    {
+                    return view('login')->with('failure','Invalid Credentials');
+
+                    }    
+            }
+
+   }
+    public function logout(Request $request)
     {
-
+        Session::flush();
+        return redirect('login');
     }
 }

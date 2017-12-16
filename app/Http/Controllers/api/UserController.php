@@ -22,7 +22,7 @@ class UserController extends Controller
                             'email' => 'required|email|max:255',
                             'address' => 'required|string',
                             'insuranceid' => 'required|digits_between:1,15|numeric',
-                            'password' => 'required|min:6|max:127',
+                            'password' => 'required|min:1|max:127',
                 ]);
                 if($validator->fails())
                 {
@@ -107,8 +107,8 @@ class UserController extends Controller
         try{
             $token=$request->input('token');
             $user=User::where('remember_token','=',$token)->first();
-            $result=array_merge($user->trusteddoctors->toArray(),["status_code" => 200]);
-            return response()->json($result);
+            $result=$user->trusteddoctors->map(function($user){ return $user->doctor;});
+            return response()->json(['data'=>$result,'status_code'=>200]);
         }
         catch(Exception $error){
             $message = $error->getMessage();
@@ -123,8 +123,8 @@ class UserController extends Controller
         try{
             $token=$request->input('token');
             $user=User::where('remember_token','=',$token)->first();
-            $result=array_merge($user->checkups->toArray(),["status_code" => 200]);
-            return response()->json($result);
+            $result=$user->checkups;
+            return response()->json(['data'=>$result,'status_code'=>200]);
         }
         catch(Exception $error){
             $message = $error->getMessage();
@@ -138,8 +138,8 @@ class UserController extends Controller
         try{
             $token=$request->input('token');
             $user=User::where('remember_token','=',$token)->first();
-            $result=array_merge($user->checkups()->where('id',$id)->get()->toArray(),["status_code" => 200]);
-            return response()->json($result);
+            $result=$user->checkups()->where('id',$id)->get();
+            return response()->json(['data'=>$result,'status_code'=>200]);
         }
         catch(Exception $error){
             $message = $error->getMessage();
