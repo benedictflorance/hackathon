@@ -22,7 +22,7 @@ class UserController extends Controller
                             'email' => 'required|email|max:255',
                             'address' => 'required|string',
                             'insuranceid' => 'required|digits_between:1,15|numeric',
-                            'password' => 'required|min:59|max:60',
+                            'password' => 'required|min:6|max:127',
                 ]);
                 if($validator->fails())
                 {
@@ -40,7 +40,7 @@ class UserController extends Controller
                         'email' => $request->input('email'),
                         'address' => $request->input('address'),
                         'insuranceid' => $request->input('insuranceid'),
-                        'password' => $request->input('password'),    
+                        'password' => password_hash($request->input('password'),PASSWORD_DEFAULT),    
                     ]);
                     $message=$user->name." has been registered";
                     $status_code=200;

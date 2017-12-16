@@ -28,11 +28,13 @@ class MailController extends Controller
 	        {
 	        	$token=str_random(60);
 	        	$doctor->update(['token' => $token]);
-	        	Mail::to($doctor->email)->send(new VerifyEmail($token));
+	        	Mail::to($doctor->email)->send(new VerifyEmail($token));	        	
+	        	return view('verifyemail')->with('success','Kindly check your mail, doctor!');
+
 	        }
 	        else
 	        {
-	        	return redirect()->back()->with('message','You are not a registered doctor');
+	        	return view('verifyemail')->with('failure','You are not a registered doctor');
 	        }
     	}
     }
