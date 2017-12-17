@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "fb13913620747be7eeba1a0b0dd0e4ff",
+    "content-hash": "0c6bcee047914128c71ea17ef6dae99d",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1488,6 +1488,35 @@
                 "uuid"
             ],
             "time": "2017-09-22T20:46:04+00:00"
+        },
+        {
+            "name": "sendotp/sendotp",
+            "version": "1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MSG91/sendotp-php.git",
+                "reference": "bd171fe43332c384a7ca9058b871ebc1a7be75c1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MSG91/sendotp-php/zipball/bd171fe43332c384a7ca9058b871ebc1a7be75c1",
+                "reference": "bd171fe43332c384a7ca9058b871ebc1a7be75c1",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "sendotp\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Rahul Chordiya",
+                    "email": "rahul@walkover.in"
+                }
+            ],
+            "time": "2017-08-04T12:31:20+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

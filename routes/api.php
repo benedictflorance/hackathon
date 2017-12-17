@@ -21,6 +21,8 @@ Route::post('newuser','api\UserController@newUser');
 // Doctor Details
 Route::post('doctors/getall','api\DoctorController@getAll');
 Route::post('doctors/getbyid/{id}','api\DoctorController@getById'); //id here means registerid of the doctor
+Route::post('/sendotp','api\OTPController@sendOTP');
+Route::post('/verifyotp','api\OTPController@verifyOTP');
 
 Route::group(['middleware'=>'checkToken', 'namespace'=>'api'],function(){
 	// Authentication Routes

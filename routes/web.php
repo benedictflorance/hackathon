@@ -26,3 +26,4 @@ Route::group(['middleware'=>'checkSession'],function(){
 	Route::post('/checkups/getall','DoctorController@showPatientHistory');
 	Route::post('/checkups/getbyid','DoctorController@showPatientCheckup');
 });
+
