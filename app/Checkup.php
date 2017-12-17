@@ -10,6 +10,7 @@ class Checkup extends Model
 {
     //
     protected $hidden=['updated_at'];
+    protected $fillable=['aadhar','registerid','questions','advice','medicines','emergency','vaccination','surgery','accompany','accmobile','surgdetail','vaccdetail','emergdetail','remarks','filename'];
     public function user()
     {
     	return $this->belongsTo(User::class,'aadhar','aadhar');

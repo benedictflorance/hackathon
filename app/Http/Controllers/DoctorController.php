@@ -7,6 +7,8 @@ use Session;
 use App\TrustedDoctor;
 use App\Doctor;
 use App\User;
+use App\Checkup;
+use Validator;
 
 class DoctorController extends Controller
 {
@@ -44,6 +46,57 @@ class DoctorController extends Controller
 
     public function storeCheckupDetails(Request $request)
     {
+    	$aadhar=$request->input('aadhar');
+    	$count=TrustedDoctor::where(['aadhar' => $aadhar, 'registerid' => Session::get('registerid')])->count();
+    	if($count)
+    	{	
+    		$validator = Validator::make($request->all(),[
+                'questions' => 'required|string',
+                'advice' => 'required|string',
+                'medicines' => 'required|string',
+                'emergency' => 'required|boolean',
+                'vaccination' => 'required|boolean',
+                'surgery' => 'required|boolean',
+                'aadhar' => 'required|numeric|digits:12',
+                'accompany' => 'string|max:511|nullable',
+                'accmobile' => 'numeric|digits:10|nullable',
+                'surgdetail' => 'string|nullable',
+                'vaccdetail' => 'string|nullable',
+                'emergdetail' => 'string|nullable',
+                'remarks' => 'string|nullable',
+                'filename' => 'string|nullable'
+
+                ]);
+                if($validator->fails())
+                {
+                    return redirect()->back()->withErrors($validator);
+                }
+                else
+                {
+                Checkup::create([
+                'questions' => $request->input('questions'),
+                'advice' => $request->input('advice'),
+                'medicines' => $request->input('medicines'),
+                'emergency' => $request->input('emergency'),
+                'vaccination' => $request->input('vaccination'),
+                'surgery' => $request->input('surgery'),
+                'aadhar' => $request->input('aadhar'),
+                'accompany' => $request->input('accompany'),
+                'accmobile' => $request->input('accmobile'),
+                'surgdetail' => $request->input('surgedetail'),
+                'vaccdetail' => $request->input('vaccdetail'),
+                'emergdetail' => $request->input('emergdetail'),
+                'remarks' => $request->input('remarks'),
+                'filename' => $request->input('filename'),
+                'registerid' => Session::get('registerid'),
+                ]);	
+                return redirect('home');
+                }
+    	}
+    	else
+    	{
+    		return redirect('home');
+    	}
 
     }
 
@@ -66,6 +119,24 @@ class DoctorController extends Controller
     }
     public function showPatientCheckup(Request $request)
     {
-
+    	$aadhar=$request->input('aadhar');
+    	$id=$request->input('id');
+    	$count=TrustedDoctor::where(['aadhar' => $aadhar, 'registerid' => Session::get('registerid')])->count();
+    	if($count)
+    	{	
+    		$user=User::where('aadhar',$aadhar)->first();
+    		$checkup=Checkup::where([
+    			'aadhar' => $aadhar,
+    			'id' => $id
+    	])->first();
+    		return view('checkup')->with([
+    			'user' => $user,
+    			'checkup' => $checkup,
+    		]);
+    	}
+    	else
+    	{
+    		return redirect('home');
+    	}
     }
 }

@@ -115,7 +115,7 @@ span:nth-child(1)
   left: auto;
 }
 .logout{
-    	position: absolute;
+    	position: fixed;
     	top:90%;
     	right:3%;
     }
@@ -140,6 +140,7 @@ span:nth-child(1)
 		<h3>{{$checkup->doctor->name}} , {{$checkup->doctor->hname}}</h3>
 		<p>{{$checkup->questions}}</p>
 		<form action="{{url('/checkups/getbyid')}}" method="POST">
+      {{csrf_field()}}
 			<input type="hidden" name="aadhar" value="{{$user->aadhar}}"></input>
 			<input type="hidden" name="id" value="{{$checkup->id}}"></input>
 			<input type="submit" class="btn btn-primary" value="View this"></input>

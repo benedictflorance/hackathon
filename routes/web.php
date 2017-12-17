@@ -24,5 +24,5 @@ Route::group(['middleware'=>'checkSession'],function(){
 	Route::post('/addcheckup','DoctorController@showCheckupForm');
 	Route::post('/storecheckup','DoctorController@storeCheckupDetails');
 	Route::post('/checkups/getall','DoctorController@showPatientHistory');
-	Route::post('/checkups/getbyid','DoctorController@showPatienCheckup');
+	Route::post('/checkups/getbyid','DoctorController@showPatientCheckup');
 });
