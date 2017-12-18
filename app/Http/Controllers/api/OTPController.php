@@ -16,7 +16,7 @@ class OTPController extends Controller
 		    $officialuser=OfficialUser::where('aadhar',$aadhar)->first();
 		    $mobile=$officialuser->mobile;
 			$client = new WAY2SMSClient();
-		    $client->login('9994591883', 'qwerty123');
+		    $client->login('yourway2smsusername', 'yourway2sms password');
 		    $otp=rand(1000,9999);
 		    $officialuser->update(['otp'=> $otp]);
 		    $client->send($mobile, 'Your OTP for the Aadhaar HealthCare Verification is '.$otp);
