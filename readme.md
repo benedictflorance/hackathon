@@ -28,9 +28,9 @@
 ### Table Description
 
 Table Name        |  Description
------------------------------------------------------------------------------------------------------------------------------------
+------------------|---------------
 `official_users`  | Analogous to the official Aadhaar database of the government (every aadhar linked with a mobile number and OTP)
-`official_doctos` | Analogous to the official doctor database of the government (every doctor linked with registed practitioner ID)
+`official_doctos` | Analogous to the official doctor database of the government (every doctor linked with a registered practitioner ID)
 `users`           | Users details upon registration
 `doctors`         | Doctors details upon registration
 `trusted_doctors` | Trusted Doctors details of users. Aadhar ID linked with multiple practitioner IDs.
